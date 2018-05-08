@@ -1,3 +1,11 @@
+#Clion
+/cmake-build-debug/
+CMakeLists.txt
+/.idea/
+
+#Mac
+.DS_Store
+
 # Prerequisites
 *.d
 
