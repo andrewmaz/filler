@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include "libftprintf/libft/libft.h"
 
-#define ABS(x) (x < 0)?-x:x;
+#define ABS(x) (((x) < 0) ? -(x) : (x))
 
 typedef struct	s_data
 {
@@ -28,6 +28,8 @@ typedef struct	s_data
   char	**map;
   int 	size_piece[2];
   char	**piece;
+  int 	xp[2];
+  int   yp[2];
 }				t_data;
 
 t_data			*ft_new_data(void);
@@ -35,5 +37,6 @@ t_data			*ft_new_data(void);
 void			ft_read_name_size(t_data *data);
 void			ft_read_map_piece(t_data *data);
 int ft_add_piece(t_data *data);
+int 	ft_src_in_col(char **arr, int size, int col);
 
 #endif

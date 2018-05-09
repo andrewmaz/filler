@@ -41,7 +41,7 @@ void	ft_read_name_size(t_data *data)
 			dstr = ft_strsplit(str, ' ');
 			data->size_map[0] = (int)ft_atoi(dstr[1]);
 			data->size_map[1] = (int)ft_atoi(dstr[2]);
-			//ft_dstrdel(&dstr);
+			ft_dstrdel(&dstr);
 		}
 		ft_strdel(&str);
 	}
@@ -54,7 +54,7 @@ void	ft_read_map_piece(t_data *data)
 	char **dstr;
 
 	i = 0;
-	if (data->map)
+	if (data->map && *data->map)
 		ft_dstrdel(&data->map);
 	data->map = ft_dstrnew(data->size_map[0]);
 	while (i < data->size_map[0] && get_next_line(data->fd, &str))
@@ -70,9 +70,10 @@ void	ft_read_map_piece(t_data *data)
 	ft_strdel(&str);
 	ft_dstrdel(&dstr);
 	i = 0;
-	if (data->piece)
+	if (data->piece && *data->piece)
 		ft_dstrdel(&data->piece);
 	data->piece = ft_dstrnew(data->size_piece[0]);
 	while (i < data->size_piece[0])
 		get_next_line(data->fd, &data->piece[i++]);
+	//ft_mod_piece(data);
 }

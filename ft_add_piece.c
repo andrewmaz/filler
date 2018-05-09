@@ -12,16 +12,23 @@
 
 #include "filler.h"
 
-int ft_manh_len(int *a, int x, int y)
+int 	ft_src_in_col(char **arr, int size, int col)
 {
 	int i;
-	int j;
 
-	i = a[0] - x;
-	i = i < 0 ? -i : i;
-	j = a[1] - y;
-	j = j < 0 ? -j : j;
-	return (i + j);
+	i = 0;
+	while (i < size)
+	{
+		if (arr[i][col] == '*')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int ft_manh_len(int *a, int x, int y)
+{
+	return (ABS(a[0] - x) + ABS(a[1] - y));
 }
 
 void ft_ret_last_coo(t_data *data, int *xy, char n)
@@ -38,9 +45,9 @@ void ft_ret_last_coo(t_data *data, int *xy, char n)
 			if (data->map[i][j] == n || data->map[i][j] == ft_toupper(n))
 			{
 				xy[0] = xy[0] == -1 ? i : xy[0];
-				xy[2] = xy[2] == -1 ? j : xy[2];
+				xy[2] = j < xy[2] || xy[2] == -1 ? j : xy[2];
 				xy[1] = i;
-				xy[3] = j < xy[3] || xy[3] == -1 ? j : xy[3];
+				xy[3] = j > xy[3] ? j : xy[3];
 			}
 			j++;
 		}
@@ -55,15 +62,14 @@ int ft_valid_build(t_data *data, int x, int y)
 	int ny;
 	int o;
 
-	i = 0;
+	i = data->xp[0];
 	o = 0;
-	while (i < data->size_piece[0] && x < data->size_map[0])
+	while (i <= data->xp[1] && x < data->size_map[0])
 	{
-		j = 0;
+		j = data->yp[0];
 		ny = y;
-		while (j < data->size_piece[1] && ny < data->size_map[1])
+		while (j <= data->yp[1] && ny < data->size_map[1])
 		{
-			//ft_printf("%c\n", data->map[x][ny]);
 			if (data->map[x][ny++] == '.' || data->piece[i][j] == '.')
 				j++;
 			else
@@ -75,12 +81,12 @@ int ft_valid_build(t_data *data, int x, int y)
 				j++;
 			}
 		}
-		if (j < data->size_piece[1])
+		if (j <= data->yp[1])
 			return (0);
 		i++;
 		x++;
 	}
-	if (i < data->size_piece[0])
+	if (i <= data->xp[1])
 		return (0);
 	return (o);
 }
@@ -141,7 +147,22 @@ void ft_build(t_data *data, int *nxy)
 	}
 	if (xy[0] == -1)
 		exit(1);
-	ft_printf("%d %d\n", xy[0], xy[1]);
+	else
+		ft_printf("%d %d\n", xy[0] - data->xp[0], xy[1] - data->yp[0]);
+}
+
+void ft_add_piece_coor(t_data *data)
+{
+	while (!ft_strstr(data->piece[data->xp[0]], "*"))
+		data->xp[0]++;
+	data->xp[1] = data->size_piece[0] - 1;
+	while (!ft_strstr(data->piece[data->xp[1]], "*"))
+		data->xp[1]--;
+	while (!ft_src_in_col(data->piece, data->size_piece[0], data->yp[0]))
+		data->yp[0]++;
+	data->yp[1] = data->size_piece[1] - 1;
+	while (!ft_src_in_col(data->piece, data->size_piece[0], data->yp[1]))
+		data->yp[1]--;
 }
 
 int ft_add_piece(t_data *data)
@@ -152,7 +173,12 @@ int ft_add_piece(t_data *data)
 	nxy[1] = -1;
 	nxy[2] = -1;
 	nxy[3] = -1;
+	data->xp[0] = 0;
+	data->xp[1] = 0;
+	data->yp[0] = 0;
+	data->yp[1] = 0;
 	ft_ret_last_coo(data, nxy, data->nsym);
+	ft_add_piece_coor(data);
 	//int t = ft_valid_build(data, 2, 2);
 	ft_build(data, nxy);
 	return (1);

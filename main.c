@@ -12,14 +12,13 @@
 
 #include "filler.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
 	t_data	*data;
 	int 	b;
 
 	data = ft_new_data();
 	//data->fd = open("../1", O_RDONLY);
-	data->fd = 0;
 	ft_read_name_size(data);
 	b = 1;
 	while (b)

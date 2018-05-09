@@ -26,5 +26,9 @@ t_data	*ft_new_data(void)
 	data->size_piece[1] = 0;
 	data->piece = NULL;
 	data->fd = 0;
+	data->xp[0] = 0;
+	data->xp[1] = 0;
+	data->yp[0] = 0;
+	data->yp[1] = 0;
 	return (data);
 }
