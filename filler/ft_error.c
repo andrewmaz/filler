@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_val.c                                       :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/10 14:20:50 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/10 14:20:50 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/10 14:29:45 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/10 15:46:40 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	ft_set_val(int *a, int *b, int an, int bn)
+void	ft_error(t_data *data)
 {
-	*a = an;
-	*b = bn;
+	ft_del_data(data);
+	exit(1);
 }

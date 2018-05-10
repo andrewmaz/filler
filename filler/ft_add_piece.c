@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 10:11:15 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/10 15:05:55 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:49:08 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_valid_build(t_data *data, int x, int y)
 				j++;
 			else
 			{
-				if(o || (data->map[x][ny - 1] != data->msym && \
+				if (o || (data->map[x][ny - 1] != data->msym && \
 					data->map[x][ny - 1] != ft_toupper(data->msym)))
 					return (0);
 				ft_set_val(&o, &j, o + 1, j + 1);
@@ -53,7 +53,6 @@ static int	ft_valid_build(t_data *data, int x, int y)
 	}
 	return (i <= data->xp[1] ? 0 : o);
 }
-
 
 static void	ft_build(t_data *data, int len2, int i)
 {
@@ -67,7 +66,7 @@ static void	ft_build(t_data *data, int len2, int i)
 		j = 0;
 		while (j < data->size_map[1])
 		{
-			if(ft_valid_build(data, i, j))
+			if (ft_valid_build(data, i, j))
 			{
 				len1 = ft_first_op(i, j, data);
 				if (len2 == -1 || len1 < len2)

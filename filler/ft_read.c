@@ -6,15 +6,16 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 09:10:01 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/10 14:33:45 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:50:15 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-char 	**ft_dstrnew(int size)
+char	**ft_dstrnew(int size)
 {
 	char	**new;
+
 	new = (char **)malloc(sizeof(char *) * (size + 1));
 	new[size] = NULL;
 	return (new);
@@ -49,9 +50,9 @@ void	ft_read_name_size(t_data *data)
 
 void	ft_read_map_piece(t_data *data)
 {
-	int i;
-	char *str;
-	char **dstr;
+	int		i;
+	char	*str;
+	char	**dstr;
 
 	i = 0;
 	(data->map && *data->map) ? ft_delmap(data->map, data->size_map[0]) : 0;

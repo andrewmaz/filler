@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/10 14:29:45 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/10 15:16:30 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/10 14:23:34 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/10 15:46:58 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void ft_error(t_data *data)
+void	ft_delmap(char **str, int size)
 {
-	ft_del_data(data);
-	exit(1);
+	int i;
+
+	i = 0;
+	while (i < size)
+		ft_strdel(&str[i++]);
+	free(str);
+}
+
+void	ft_del_data(t_data *data)
+{
+	ft_delmap(data->map, data->size_map[0]);
+	ft_delmap(data->piece, data->size_piece[0]);
+	free(data);
 }

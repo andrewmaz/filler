@@ -10,19 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME_FIL = amazurok.filler
+NAME = amazurok.filler
 
-MFIL = make -C filler
+SRC = ft_add_piece.c ft_del.c ft_error.c ft_new.c ft_read.c ft_set_val.c \
+		ft_src_best_coor.c main.c
 
-all:
-	$(MFIL)
-	mv ./filler/$(NAME_FIL) .
+MLIB = make -C ../libftprintf
 
+LIB = ../libftprintf/libftprintf.a
+
+all: $(NAME)
+
+$(NAME): $(SRC)
+	$(MLIB) 
+	gcc -Wall -Wextra -Werror $(SRC) $(LIB) -o $(NAME)
+	
 clean:
-	$(MFIL) clean
+	$(MLIB) clean
 
 fclean: clean
-	rm -f $(NAME_FIL)
-	$(MFIL) fclean
+	rm -f $(NAME)
+	$(MLIB) fclean
 
 re: fclean all
