@@ -6,13 +6,13 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 10:11:15 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/07 12:50:35 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:05:55 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int 	ft_src_in_col(char **arr, int size, int col)
+static int	ft_src_in_col(char **arr, int size, int col)
 {
 	int i;
 
@@ -26,50 +26,18 @@ int 	ft_src_in_col(char **arr, int size, int col)
 	return (0);
 }
 
-int ft_manh_len(int *a, int x, int y)
-{
-	return (ABS(a[0] - x) + ABS(a[1] - y));
-}
-
-void ft_ret_last_coo(t_data *data, int *xy, char n)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < data->size_map[0])
-	{
-		j = 0;
-		while (j < data->size_map[1])
-		{
-			if (data->map[i][j] == n || data->map[i][j] == ft_toupper(n))
-			{
-				xy[0] = xy[0] == -1 ? i : xy[0];
-				xy[2] = j < xy[2] || xy[2] == -1 ? j : xy[2];
-				xy[1] = i;
-				xy[3] = j > xy[3] ? j : xy[3];
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-int ft_valid_build(t_data *data, int x, int y)
+static int	ft_valid_build(t_data *data, int x, int y)
 {
 	int i;
 	int j;
 	int ny;
 	int o;
 
-	i = data->xp[0];
-	o = 0;
+	ft_set_val(&i, &o, data->xp[0], 0);
 	while (i <= data->xp[1] && x < data->size_map[0])
 	{
-		j = data->yp[0];
-		ny = y;
+		ft_set_val(&j, &ny, data->yp[0], y);
 		while (j <= data->yp[1] && ny < data->size_map[1])
-		{
 			if (data->map[x][ny++] == '.' || data->piece[i][j] == '.')
 				j++;
 			else
@@ -77,55 +45,23 @@ int ft_valid_build(t_data *data, int x, int y)
 				if(o || (data->map[x][ny - 1] != data->msym && \
 					data->map[x][ny - 1] != ft_toupper(data->msym)))
 					return (0);
-				o++;
-				j++;
+				ft_set_val(&o, &j, o + 1, j + 1);
 			}
-		}
 		if (j <= data->yp[1])
 			return (0);
-		i++;
-		x++;
+		ft_set_val(&i, &x, i + 1, x + 1);
 	}
-	if (i <= data->xp[1])
-		return (0);
-	return (o);
+	return (i <= data->xp[1] ? 0 : o);
 }
 
-int ft_min_len(int *a, int *nxy)
-{
-	int len;
-	int tmp;
-	int i;
-	int j;
 
-	i = 0;
-	len = -1;
-	while (i < 2)
-	{
-		j = 0;
-		while (j < 2)
-		{
-			tmp = ft_manh_len(a, nxy[i], nxy[j]);
-			len = (len == -1 || tmp < len ? tmp : len);
-			j++;
-		}
-		i++;
-	}
-	return (len);
-}
-
-void ft_build(t_data *data, int *nxy)
+static void	ft_build(t_data *data, int len2, int i)
 {
-	int i;
 	int j;
 	int xy[2];
 	int len1;
-	int len2;
 
-	i = 0;
-	xy[0] = -1;
-	xy[1] = -1;
-	len2 = -1;
+	ft_set_val(&xy[0], &xy[1], -1, -1);
 	while (i < data->size_map[0])
 	{
 		j = 0;
@@ -133,25 +69,22 @@ void ft_build(t_data *data, int *nxy)
 		{
 			if(ft_valid_build(data, i, j))
 			{
-				len1 = ft_min_len(xy, nxy);
-				if (len2 == -1 || len2 > len1)
+				len1 = ft_first_op(i, j, data);
+				if (len2 == -1 || len1 < len2)
 				{
-					xy[0] = i;
-					xy[1] = j;
+					ft_set_val(&xy[0], &xy[1], i, j);
+					len2 = len1;
 				}
-				len2 = len1;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (xy[0] == -1)
-		exit(1);
-	else
-		ft_printf("%d %d\n", xy[0] - data->xp[0], xy[1] - data->yp[0]);
+	(xy[0] == -1) ? ft_error(data) : \
+				ft_printf("%d %d\n", xy[0] - data->xp[0], xy[1] - data->yp[0]);
 }
 
-void ft_add_piece_coor(t_data *data)
+static void	ft_add_piece_coor(t_data *data)
 {
 	while (!ft_strstr(data->piece[data->xp[0]], "*"))
 		data->xp[0]++;
@@ -165,21 +98,13 @@ void ft_add_piece_coor(t_data *data)
 		data->yp[1]--;
 }
 
-int ft_add_piece(t_data *data)
+int			ft_add_piece(t_data *data)
 {
-	int nxy[4];
-
-	nxy[0] = -1;
-	nxy[1] = -1;
-	nxy[2] = -1;
-	nxy[3] = -1;
 	data->xp[0] = 0;
 	data->xp[1] = 0;
 	data->yp[0] = 0;
 	data->yp[1] = 0;
-	ft_ret_last_coo(data, nxy, data->nsym);
 	ft_add_piece_coor(data);
-	//int t = ft_valid_build(data, 2, 2);
-	ft_build(data, nxy);
+	ft_build(data, -1, 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 15:46:41 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/07 12:41:10 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/10 14:33:45 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "libftprintf/libft/libft.h"
-
-#define ABS(x) (((x) < 0) ? -(x) : (x))
 
 typedef struct	s_data
 {
@@ -33,10 +31,14 @@ typedef struct	s_data
 }				t_data;
 
 t_data			*ft_new_data(void);
-
 void			ft_read_name_size(t_data *data);
 void			ft_read_map_piece(t_data *data);
-int ft_add_piece(t_data *data);
-int 	ft_src_in_col(char **arr, int size, int col);
+int 			ft_add_piece(t_data *data);
+int 			ft_src_in_col(char **arr, int size, int col);
+int				ft_first_op(int i, int j, t_data *data);
+void			ft_set_val(int *a, int *b, int an, int bn);
+void			ft_delmap(char **str, int size);
+void			ft_del_data(t_data *data);
+void 			ft_error(t_data *data);
 
 #endif

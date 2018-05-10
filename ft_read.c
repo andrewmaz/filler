@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 09:10:01 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/07 12:42:02 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/10 14:33:45 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	ft_read_map_piece(t_data *data)
 	char **dstr;
 
 	i = 0;
-	if (data->map && *data->map)
-		ft_dstrdel(&data->map);
+	(data->map && *data->map) ? ft_delmap(data->map, data->size_map[0]) : 0;
 	data->map = ft_dstrnew(data->size_map[0]);
 	while (i < data->size_map[0] && get_next_line(data->fd, &str))
 	{
@@ -65,15 +64,14 @@ void	ft_read_map_piece(t_data *data)
 	}
 	get_next_line(data->fd, &str);
 	dstr = ft_strsplit(str, ' ');
+	if (data->piece && *data->piece)
+		ft_delmap(data->piece, data->size_piece[0]);
 	data->size_piece[0] = str ? (int)ft_atoi(dstr[1]) : 0;
 	data->size_piece[1] = str ? (int)ft_atoi(dstr[2]) : 0;
 	ft_strdel(&str);
 	ft_dstrdel(&dstr);
 	i = 0;
-	if (data->piece && *data->piece)
-		ft_dstrdel(&data->piece);
 	data->piece = ft_dstrnew(data->size_piece[0]);
 	while (i < data->size_piece[0])
 		get_next_line(data->fd, &data->piece[i++]);
-	//ft_mod_piece(data);
 }
