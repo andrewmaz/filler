@@ -18,7 +18,7 @@ int		main(void)
 
 	data = ft_new_data();
 	ft_read_name_size(data);
-	while (1)
+	while (TRUE)
 	{
 		ft_read_map_piece(data);
 		ft_add_piece(data);

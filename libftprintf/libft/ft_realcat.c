@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_realcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 10:35:33 by amazurok          #+#    #+#             */
-/*   Updated: 2017/11/03 15:07:47 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/12 12:42:21 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/12 12:42:21 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+char	*ft_realcat(char *input, char *str)
 {
-	if (as)
-	{
-		free(*as);
-		*as = NULL;
-	}
+	input = ft_realloc(input, (ft_strlen(input) + ft_strlen(str)));
+	input = ft_strcat(input, str);
+	return (input);
+}
+
+char	*ft_realcatendl(char *input, char *str)
+{
+	input = ft_realloc(input, (ft_strlen(input) + ft_strlen(str) + 1));
+	input = ft_strcat(input, str);
+	input = ft_strcat(input, "\n");
+	return (input);
 }

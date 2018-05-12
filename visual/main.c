@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 10:35:33 by amazurok          #+#    #+#             */
-/*   Updated: 2017/11/03 15:07:47 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/10 16:10:28 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/12 16:21:59 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <locale.h>
+#include "visual.h"
 
-void	ft_strdel(char **as)
+int		main(int argc, char **argv)
 {
-	if (as)
+	t_kkey *key;
+	setlocale(LC_ALL, "");
+
+	key = ft_new_c_key();
+	ft_read_key(argc, argv, key);
+	if (key->h)
 	{
-		free(*as);
-		*as = NULL;
+		ft_help();
+		free(key);
+		return (0);
 	}
+	key->t = !key->t && key->cl ? 150 : key->t;
+	ft_visual(key);
+	free(key);
 }

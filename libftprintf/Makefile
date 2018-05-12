@@ -6,7 +6,7 @@
 #    By: amazurok <amazurok@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/15 16:13:47 by amazurok          #+#    #+#              #
-#    Updated: 2018/02/19 16:28:42 by amazurok         ###   ########.fr        #
+#    Updated: 2018/05/12 12:10:59 by amazurok         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ LIB_SRC = 	ft_atoi.o ft_bzero.o ft_char_replace.o ft_isalnum.o ft_isalpha.o \
 			ft_strmap.o ft_strmapi.o ft_strncat.o ft_strncmp.o ft_strncpy.o \
 			ft_strnequ.o ft_strnew.o ft_strnstr.o ft_strrchr.o ft_strsplit.o \
 			ft_strstr.o ft_strsub.o ft_strtrim.o ft_tolower.o ft_toupper.o \
-			ft_realloc.o get_next_line.o ft_deldstr.o
+			ft_realloc.o get_next_line.o ft_dstrdel.o ft_intrealloc.o ft_realcat.o
 
 PRF_SRC = 	ft_addchar.o ft_check_key.o ft_del_key.o ft_itoa_base.o ft_myputustr_fd.o \
 			ft_n.o ft_new_list.o ft_nonoercent.o ft_print_char_str.o \

@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_intrealloc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 10:35:33 by amazurok          #+#    #+#             */
-/*   Updated: 2017/11/03 15:07:47 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/12 12:43:43 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/12 12:43:43 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+int		*ft_intrealloc(int *arr, int oldsize)
 {
-	if (as)
+	int *new;
+	int i;
+
+	i = 0;
+	new = (int*)malloc(sizeof(int) * (oldsize + 1));
+	if (arr)
 	{
-		free(*as);
-		*as = NULL;
+		while (i < oldsize)
+		{
+			new[i] = arr[i];
+			i++;
+		}
+		free(arr);
 	}
+	return (new);
 }

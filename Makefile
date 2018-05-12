@@ -10,19 +10,31 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME_FIL = amazurok.filler
+NAME_F = amazurok.filler
+NAME_V = visual_am
 
-MFIL = make -C filler
+SRC_F= ./filler/ft_add_piece.c ./filler/ft_del.c ./filler/ft_error.c ./filler/ft_new.c \
+		./filler/ft_read.c ./filler/ft_set_val.c ./filler/ft_src_best_coor.c ./filler/main.c
+
+SRC_V = ./visual/ft_new.c ./visual/ft_print.c ./visual/ft_read_key.c ./visual/ft_help.c \
+		./visual/ft_visual.c ./visual/main.c
+
+MLIB = make -C ../libftprintf
+
+LIB = libftprintf/libftprintf.a
 
 all:
-	$(MFIL)
-	mv ./filler/$(NAME_FIL) .
+	$(MLIB) 
+	gcc -Wall -Wextra -Werror $(SRC_F) $(LIB) -o $(NAME_F)
+	gcc -Wall -Wextra -Werror $(SRC_V) $(LIB) -o $(NAME_V)
+	
 
 clean:
-	$(MFIL) clean
+	$(MLIB) clean
 
 fclean: clean
-	rm -f $(NAME_FIL)
-	$(MFIL) fclean
+	rm -f $(NAME_F)
+	rm -f $(NAME_V)
+	$(MLIB) fclean
 
 re: fclean all

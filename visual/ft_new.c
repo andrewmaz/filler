@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_new.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/30 10:35:33 by amazurok          #+#    #+#             */
-/*   Updated: 2017/11/03 15:07:47 by amazurok         ###   ########.fr       */
+/*   Created: 2018/05/12 11:46:38 by amazurok          #+#    #+#             */
+/*   Updated: 2018/05/12 15:22:28 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "visual.h"
 
-void	ft_strdel(char **as)
+t_kkey	*ft_new_c_key(void)
 {
-	if (as)
-	{
-		free(*as);
-		*as = NULL;
-	}
+	t_kkey *key;
+
+	key = (t_kkey*)malloc(sizeof(t_kkey));
+	key->p1 = L'➊';
+	key->p2 = L'➋';
+	key->c = 0;
+	key->t = 0;
+	key->h = 0;
+	key->cl = 0;
+	return (key);
 }

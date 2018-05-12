@@ -13,6 +13,7 @@
 #ifndef FILLER_H
 # define FILLER_H
 
+# define TRUE 1
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libftprintf/libft/libft.h"
