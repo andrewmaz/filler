@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:17:40 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/12 16:21:59 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/14 09:25:44 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_print_map(char *str, t_kkey *key)
 
 void	ft_print_players(char *str, t_kkey *key)
 {
-	char **dstr;
-	int i;
-	int p;
+	char	**dstr;
+	int		i;
+	int		p;
 
 	i = 0;
 	dstr = ft_strsplit(str, ' ');
@@ -81,7 +81,7 @@ void	ft_print_result(char *str, t_kkey *key)
 	{
 		key->c ? ft_printf("{green}") : 0;
 		ft_printf("\nThe %s player(%lc) has won!!!\n", p1 > p2 ? "first" : \
-		"second" , p1 > p2 ? key->p1 : key->p2);
+		"second", p1 > p2 ? key->p1 : key->p2);
 	}
 	else
 	{
@@ -90,4 +90,22 @@ void	ft_print_result(char *str, t_kkey *key)
 	}
 	ft_printf("{eoc}");
 	ft_strdel(&str);
+}
+
+char	*ft_print_piece(char *str)
+{
+	int size;
+	int i;
+
+	i = 0;
+	ft_printf("%s\n", str);
+	size = ft_atoi(str + 5);
+	ft_strdel(&str);
+	while (i < size && get_next_line(0, &str))
+	{
+		ft_printf("%s\n", str);
+		ft_strdel(&str);
+		i++;
+	}
+	return (NULL);
 }

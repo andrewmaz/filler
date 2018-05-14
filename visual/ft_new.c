@@ -22,6 +22,7 @@ t_kkey	*ft_new_c_key(void)
 	key->c = 0;
 	key->t = 0;
 	key->h = 0;
+	key->p = 0;
 	key->cl = 0;
 	return (key);
 }

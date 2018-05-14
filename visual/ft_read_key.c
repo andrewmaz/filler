@@ -24,6 +24,8 @@ int		ft_set_key(t_kkey *key, int i, char **v, int c)
 		key->c = 1;
 	else if (v[i][1] == 'h')
 		key->h = 1;
+	else if (v[i][1] == 'p')
+		key->p = 1;
 	else if (v[i][1] == 'c' && v[i][2] == 'l')
 		key->cl = 1;
 	else

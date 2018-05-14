@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 11:34:32 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/12 15:27:37 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/12 17:02:01 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	ft_help(void)
 {
-		ft_printf("______________________HELP_______________________\n");
-	ft_printf("|        usage: ./amvisual [keys] < input       |\n");
+	ft_printf("______________________HELP_______________________\n");
+	ft_printf("|     usage: ./my_visual_am [keys] < input      |\n");
 	ft_printf("|                      Keys:                    |\n");
 	ft_printf("| %-26s %-19s|\n", "-h", "<help>");
+	ft_printf("| %-26s %-19s|\n", "-p", "<show piece>");
 	ft_printf("| %-26s %-19s|\n", "-cl", "<clear console>");
 	ft_printf("| %-26s %-19s|\n", "-p1 [char sym]", "<set symbol for p1>");
 	ft_printf("| %-26s %-19s|\n", "-p2 [char sym]", "<set symbol for p2>");

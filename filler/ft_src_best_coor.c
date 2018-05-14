@@ -23,8 +23,8 @@ int		ft_around(int x, int y, int r, t_data *data)
 		j = -r;
 		while (j <= r)
 		{
-			if (x + i > 0 && x + i < data->size_map[0] && \
-				y + j > 0 && y + j < data->size_map[1] && \
+			if (x + i >= 0 && x + i < data->size_map[0] && \
+				y + j >= 0 && y + j < data->size_map[1] && \
 				(data->map[x + i][y + j] == data->nsym || \
 				data->map[x + i][y + j] == ft_toupper(data->nsym)))
 				return (r);
@@ -42,6 +42,10 @@ int		ft_first_op(int i, int j, t_data *data)
 
 	r = 1;
 	while (!(res = ft_around(i, j, r, data)))
+	{
 		r++;
+		if (r > data->size_map[0] + data->size_map[1])
+			return (r);
+	}
 	return (res);
 }
