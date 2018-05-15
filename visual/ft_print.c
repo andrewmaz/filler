@@ -6,7 +6,7 @@
 /*   By: amazurok <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:17:40 by amazurok          #+#    #+#             */
-/*   Updated: 2018/05/14 09:25:44 by amazurok         ###   ########.fr       */
+/*   Updated: 2018/05/15 09:58:06 by amazurok         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	ft_print_players(char *str, t_kkey *key)
 	int		p;
 
 	i = 0;
+	if (!str)
+		return ;
 	dstr = ft_strsplit(str, ' ');
 	p = (int)ft_atoi(dstr[2] + 1);
 	while (dstr[i])
@@ -69,12 +71,12 @@ void	ft_print_result(char *str, t_kkey *key)
 	int p1;
 	int p2;
 
-	p1 = (int)ft_atoi(str + 9);
+	p1 = str ? (int)ft_atoi(str + 9) : 0;
 	key->c ? ft_printf("{green}") : 0;
 	ft_printf("Player %lc set %d blocks\n", key->p1, p1);
 	ft_strdel(&str);
 	get_next_line(0, &str);
-	p2 = (int)ft_atoi(str + 9);
+	p2 = str ? (int)ft_atoi(str + 9) : 0;
 	key->c ? ft_printf("{red}") : 0;
 	ft_printf("Player %lc set %d blocks\n", key->p2, p2);
 	if (p1 != p2)
